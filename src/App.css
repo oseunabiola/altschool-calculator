@@ -1,38 +1,47 @@
-.App {
-  text-align: center;
+html,
+body,
+#root {
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main {
+  height: 100%;
+  background-color: #000;
+  color: #fff;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.screen {
+  font-family: "Orbitron", sans-serif;
+  box-shadow: inset 1px 1px 10px 2px #222;
+  background-color: #ccc;
+  color: #000;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.keys-wrapper > * {
+  margin-bottom: 0.5rem;
 }
-
-.App-link {
-  color: #61dafb;
+.key {
+  width: 3.2rem;
+  height: 3.2rem;
+  background-color: #212529;
+  box-shadow: 2px 3px #363739;
+  user-select: none;
+  transition: all 150ms ease-in-out;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.key:hover {
+  background-color: #1a1f24;
+}
+.key:active {
+  background-color: #20252a;
+  box-shadow: 1px 1px #363739;
+  translate: 1px 1px;
+}
+.key.operator {
+  box-shadow: 2px 3px #8e9197;
+  background-color: #ccc;
+}
+.key.operator:hover {
+  background-color: #999;
+}
+.key.operator:active {
+  background-color: #555;
+  box-shadow: 1px 1px #8e9197;
 }
