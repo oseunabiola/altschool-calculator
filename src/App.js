@@ -28,6 +28,7 @@ function App() {
     }
     setOperator(undefined);
     setAnswer(ans);
+    return ans;
   }
 
   const handleDot = () => {
@@ -41,15 +42,19 @@ function App() {
   function handleOperator(e) {
     const operatorKey = e.target.dataset.operator;
 
-    if (answer !== undefined) setExpression(answer);
+    const isEvaluated = answer !== undefined;
+    if (isEvaluated) setExpression(answer);
     if (expression === "0") return;
 
     if (operator === undefined) {
       setExpression((prev) => prev + operatorKey);
     }
     if (expression.endsWith(operator)) {
-      setExpression((prev) => prev.replace(prev[prev.length - 1], "") + operatorKey);
-      setOperator(operatorKey);
+      setExpression((prev) => prev.substring(0, prev.length - 1) + operatorKey);
+    }
+    if (!isEvaluated && operator && !expression.endsWith(operator)) {
+      const answer = handleCalculate();
+      setExpression(answer + operatorKey);
     }
     setOperator(operatorKey);
   }
@@ -77,6 +82,7 @@ function App() {
       setExpression("0");
     }
   }
+  function toggleNegative() {}
   return (
     <div className="main d-flex align-items-center justify-content-center">
       <div className="frame border rounded-3 px-3 py-2">
@@ -88,9 +94,7 @@ function App() {
           <div className="line d-flex gap-2">
             <Key onClick={resetExpressionAndAnswer}>C</Key>
             <Key onClick={handleBackspace} className="bi bi-backspace"></Key>
-            <Key data-operator="isMinus" onClick={handleOperator}>
-              <span className="bi bi-plus-slash-minus"></span>
-            </Key>
+            <Key onClick={toggleNegative}>&plusmn;</Key>
             <Operator data-operator="/" onClick={handleOperator}>
               &#0247;
             </Operator>
